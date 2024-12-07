@@ -23,7 +23,6 @@ def recommend_items(user_id, preferences, items_data):
 
     user_profile = items_data[items_data["id"].isin(liked_movies)]
 
-    # Добавляем отсутствующие столбцы в user_profile и заполняем нулями
     missing_cols = set(items_data.columns) - set(user_profile.columns)
     for c in missing_cols:
         user_profile[c] = 0
