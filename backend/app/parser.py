@@ -1,8 +1,8 @@
 from imdb import IMDb
-from app.models import Genre
-from app.routes.movies import _add_genre_helper, _add_movie_helper
-from app.schemas import MovieCreate, GenreCreate
-from app.database import SessionLocal
+from backend.app.models import Genre
+from backend.app.routes.movies import _add_genre_helper, _add_movie_helper
+from backend.app.schemas import MovieCreate, GenreCreate
+from backend.app.database import SessionLocal
 
 def fetch_movie_data(movie_title):
     ia = IMDb()

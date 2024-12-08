@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, Body
-from app.auth import get_current_user
-from app.database import get_db, SessionLocal
-from app.models import Movie, UserPreference, Genre
-from app.recommender import recommend_items
-from app.schemas import MovieCreate, MovieResponse, GenreCreate
+from backend.app.auth import get_current_user
+from backend.app.database import get_db, SessionLocal
+from backend.app.models import Movie, UserPreference, Genre
+from backend.app.recommender import recommend_items
+from backend.app.schemas import MovieCreate, MovieResponse, GenreCreate
 from typing import List
 import pandas as pd
 from sqlalchemy.orm import joinedload
@@ -58,13 +58,13 @@ def add_genre(genre: GenreCreate, db: SessionLocal = Depends(get_db)):
 
 @router.post("/import/")
 def import_movie_from_imdb(movie_title: str = Body(..., embed=True), db: SessionLocal = Depends(get_db)):
-    from app.parser import add_movie_from_imdb
+    from backend.app.parser import add_movie_from_imdb
     result = add_movie_from_imdb(movie_title, db)
     return result
 
 @router.post("/import_bulk/")
 def import_movie_from_imdb(movie_titles: List[str] = Body(..., embed=True), db: SessionLocal = Depends(get_db)):
-    from app.parser import add_movie_from_imdb
+    from backend.app.parser import add_movie_from_imdb
     result = []
     for movie_title in movie_titles:
         try:

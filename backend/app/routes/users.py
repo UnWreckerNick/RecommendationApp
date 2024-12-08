@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
-from app.auth import hash_password, pwd_context, create_access_token, get_current_user
-from app.database import get_db, SessionLocal
-from app.models import User, UserPreference
-from app.schemas import RegisterUser, PreferenceCreate
+from backend.app.auth import hash_password, pwd_context, create_access_token, get_current_user
+from backend.app.database import get_db, SessionLocal
+from backend.app.models import User, UserPreference
+from backend.app.schemas import RegisterUser, PreferenceCreate
 
 router = APIRouter()
 

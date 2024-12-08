@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, Float, String, ForeignKey, Table
 from sqlalchemy.orm import relationship
-from app.database import Base
+from backend.app.database import Base
 
 movie_genres = Table(
     "movie_genres",
