@@ -3,7 +3,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import StandardScaler
 
 def preprocess_items(items_data):
-    items_data['genres'] = items_data['genres'].apply(lambda genre_list: ','.join([genre.name for genre in genre_list]) if genre_list else '')
+    items_data["genres"] = items_data["genres"].apply(lambda genre_list: ','.join([genre.name for genre in genre_list]) if genre_list else '')
     genres = items_data["genres"].str.get_dummies(sep=",")
     items_data = pd.concat([items_data, genres], axis=1)
     directors = pd.get_dummies(items_data["director"], prefix="director")
@@ -46,4 +46,5 @@ def recommend_items(user_id, preferences, items_data):
     unseen_items = unseen_items[~unseen_items["id"].isin(disliked_movies)]
 
     recommendations = unseen_items.sort_values("similarity", ascending=False)
-    return recommendations[["id", "title", "similarity"]].head(10)
+    recommendations = recommendations.sort_values(by=["similarity", "rating"], ascending=[False, False])
+    return recommendations[["id", "title", "rating", "similarity"]].head(10)
