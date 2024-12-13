@@ -4,13 +4,12 @@ from backend.app.database import get_db, SessionLocal
 from backend.app.models import Movie, UserPreference, Genre
 from backend.app.recommender import recommend_items
 from backend.app.schemas import MovieCreate, MovieResponse, GenreCreate
-from typing import List
 import pandas as pd
 from sqlalchemy.orm import joinedload
 
 router = APIRouter()
 
-@router.get("/", response_model=List[MovieResponse])
+@router.get("/", response_model=list[MovieResponse])
 def get_movies(db: SessionLocal = Depends(get_db)):
     return db.query(Movie).all()
 
@@ -63,7 +62,7 @@ def import_movie_from_imdb(movie_title: str = Body(..., embed=True), db: Session
     return result
 
 @router.post("/import_bulk/")
-def import_movie_from_imdb(movie_titles: List[str] = Body(..., embed=True), db: SessionLocal = Depends(get_db)):
+def import_movie_from_imdb(movie_titles: list[str] = Body(..., embed=True), db: SessionLocal = Depends(get_db)):
     from backend.app.parser import add_movie_from_imdb
     result = []
     for movie_title in movie_titles:
