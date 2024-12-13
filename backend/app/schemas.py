@@ -1,5 +1,4 @@
 from pydantic import BaseModel
-from typing import Optional, List
 
 class RegisterUser(BaseModel):
     username: str
@@ -9,7 +8,7 @@ class MovieCreate(BaseModel):
     title: str
     director: str
     rating: float
-    genres: List[int]
+    genres: list[int]
 
 class GenreCreate(BaseModel):
     name: str
@@ -28,7 +27,7 @@ class MovieResponse(BaseModel):
     title: str
     director: str
     rating: float
-    genres: List[GenreResponse]
+    genres: list[GenreResponse]
 
     class Config:
         from_attributes = True
